@@ -7,7 +7,7 @@ A production-ready REST API for warehouse inventory management, built with Go, G
 Product Warehouse API is a modern microservice designed for managing product inventory in warehouse operations. The API delivers reliable CRUD functionality, robust error handling, and comprehensive data validation across all endpoints. Built on industry best practices, it implements clean architecture patterns ensuring maintainability, scalability, and testability.
 
 **Key Statistics:**
-- 32 comprehensive unit tests with 88.8% code coverage
+- 47 comprehensive unit tests with ~90% code coverage
 - 5 fully implemented REST endpoints
 - 5-layer clean architecture implementation
 - Docker containerization for easy deployment
@@ -52,6 +52,7 @@ product-warehouse-api/
 │   │       ├── interface.go         # Use case contracts
 │   │       ├── service.go           # Service implementation
 │   │       ├── service_test.go      # Service unit tests (21 tests)
+│   │       ├── repository.go        # Repository adapter
 │   │       └── integration_test.go  # Integration tests (4 tests)
 │   │
 │   ├── repository/                  # Data access layer (Interface Adapters)
@@ -64,15 +65,18 @@ product-warehouse-api/
 │   │       ├── router.go            # Route definitions
 │   │       └── handler/
 │   │           ├── product_handler.go      # HTTP handlers
-│   │           └── product_handler_test.go # Handler tests (11 tests)
+│   │           └── product_handler_test.go # Handler tests (12 tests)
 │   │
 │   └── infrastructure/              # Infrastructure layer
 │       ├── config/                  # Application configuration
-│       │   └── config.go
+│       │   ├── config.go
+│       │   └── config_test.go       # Config tests (2 tests)
 │       ├── db/                      # Database connection
-│       │   └── postgres.go
+│       │   ├── postgres.go
+│       │   └── postgres_test.go     # DB tests (3 tests)
 │       └── logger/                  # Logging utility
-│           └── logger.go
+│           ├── logger.go
+│           └── logger_test.go       # Logger tests (3 tests)
 │
 ├── migrations/                      # Database migrations
 │   ├── 000001_create_products_table.up.sql    # Schema creation
@@ -374,7 +378,7 @@ Host: localhost:8080
 
 ## Testing
 
-The project includes comprehensive test coverage with 32 unit tests achieving 88.8% code coverage.
+The project includes comprehensive test coverage with 47 unit and integration tests achieving ~90% code coverage.
 
 ### Run All Tests
 ```bash
@@ -393,8 +397,14 @@ go test ./...
 # Service layer tests (21 tests)
 go test -v ./internal/usecase/product/
 
-# Handler tests (11 tests)
+# Handler tests (12 tests)
 go test -v ./internal/delivery/http/handler/
+
+# Repository tests (11 tests)
+go test -v ./internal/repository/product/
+
+# Infrastructure tests (8 tests)
+go test -v ./internal/infrastructure/...
 ```
 
 ### Run with Coverage Report
@@ -409,9 +419,10 @@ go tool cover -html=coverage.out
 |-----------|----------|-------|
 | Service Layer | 95.8% | 21 |
 | Handler Layer | 81.8% | 12 |
+| Repository Layer | ~95% | 11 |
 | Infrastructure Layer | 100% | 8 |
 | Integration Tests | - | 4 |
-| **Overall** | **~90%** | **45+** |
+| **Overall** | **~90%** | **47** |
 
 ### Test Categories
 
@@ -428,6 +439,13 @@ go tool cover -html=coverage.out
 - Request/response marshalling
 - Error handling
 - Edge cases
+
+**Repository Tests (11):**
+- Create: Success, With description
+- GetByID: Success, Not found
+- Update: Success, Not found
+- Delete: Success, Not found
+- GetAll: Empty table, Multiple products, Ordering verification
 
 **Infrastructure Tests (8):**
 - Config: Structure validation, Empty config
