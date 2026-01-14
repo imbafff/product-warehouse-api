@@ -1,0 +1,60 @@
+### OS-specific ###
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### Go build artifacts ###
+bin/
+build/
+dist/
+
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+*.test
+*.out
+*.cover
+coverage.*
+coverage/
+
+# Go work / cache (kept local)
+*.tmp
+
+### Dependency/vendor directories ###
+vendor/
+
+### Logs ###
+*.log
+logs/
+
+### Env / secrets ###
+.env
+.env.*
+*.env.local
+
+### Local reports / AI-generated docs ###
+FINAL_TEST_REPORT.txt
+REQUIREMENTS_AUDIT.md
+TEST_SUMMARY.md
+TEST_EXAMPLES.md
+TESTING_GUIDE.md
+TESTING_REPORT.md
+
+### IDE / editor ###
+.idea/
+.vscode/
+*.code-workspace
+
+# GoLand / IntelliJ
+.fleet/
+
+### Misc ###
+node_modules/
+tmp/
