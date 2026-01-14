@@ -408,8 +408,10 @@ go tool cover -html=coverage.out
 | Component | Coverage | Tests |
 |-----------|----------|-------|
 | Service Layer | 95.8% | 21 |
-| Handler Layer | 81.8% | 11 |
-| **Overall** | **88.8%** | **32** |
+| Handler Layer | 81.8% | 12 |
+| Infrastructure Layer | 100% | 8 |
+| Integration Tests | - | 4 |
+| **Overall** | **~90%** | **45+** |
 
 ### Test Categories
 
@@ -421,11 +423,22 @@ go tool cover -html=coverage.out
 - GetAll: Empty list, Multiple products
 - Validation logic, Error handling
 
-**Handler Tests (11):**
+**Handler Tests (12):**
 - HTTP status codes (201, 200, 204, 400, 404)
 - Request/response marshalling
 - Error handling
 - Edge cases
+
+**Infrastructure Tests (8):**
+- Config: Structure validation, Empty config
+- Database: Invalid config handling, DSN construction
+- Logger: Instance creation, Type checking, Logging operations
+
+**Integration Tests (4):**
+- Create and retrieve product
+- Update product
+- Delete product
+- Get all products
 
 ## Database Schema
 
