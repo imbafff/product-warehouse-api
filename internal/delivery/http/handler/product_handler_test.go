@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -383,7 +384,7 @@ func TestGetAll_MultipleProducts(t *testing.T) {
 	// Создаем несколько продуктов
 	for i := 1; i <= 3; i++ {
 		product := &entity.Product{
-			Name:     "Product",
+			Name:     fmt.Sprintf("Product %d", i),
 			Price:    float64(10*i) + 0.99,
 			Quantity: i * 5,
 		}

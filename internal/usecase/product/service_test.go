@@ -2,6 +2,7 @@ package product
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 
 	"github.com/imbafff/product-warehouse-api/internal/entity"
@@ -410,7 +411,7 @@ func TestGetAll_MultipleProducts(t *testing.T) {
 	// Создаем несколько продуктов
 	for i := 1; i <= 3; i++ {
 		product := &entity.Product{
-			Name:     "Product " + string(rune(i)),
+			Name:     fmt.Sprintf("Product %d", i),
 			Price:    float64(10*i) + 0.99,
 			Quantity: i * 5,
 		}

@@ -2,6 +2,7 @@ package product
 
 import (
 	"database/sql"
+	"fmt"
 	"testing"
 
 	"github.com/imbafff/product-warehouse-api/internal/entity"
@@ -143,7 +144,7 @@ func TestIntegration_GetAll(t *testing.T) {
 	// Создаем несколько продуктов
 	for i := 1; i <= 5; i++ {
 		product := &entity.Product{
-			Name:     "Product " + string(rune(i+'0'-1)),
+			Name:     fmt.Sprintf("Product %d", i),
 			Price:    float64(i*10) + 0.99,
 			Quantity: i * 10,
 		}
